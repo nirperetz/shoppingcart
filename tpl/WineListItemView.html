@@ -1,0 +1,10 @@
+<a class="thumbnail plain">
+    <img src="pics/<%= picture %>" height="150" width="125" alt="">
+    <h5><%= name %></h5>
+    <p><%= price %>$ <br/>
+	
+    <i class="icon-globe"></i></p>
+</a>
+    <div id="label-switch" class="make-switch" data-on-label="Remove" data-off-label="Add">
+        <input class="toggle" type="checkbox" <%= added==1 ? 'checked' : '' %>>
+    </div>
