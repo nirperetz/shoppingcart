@@ -1,0 +1,30 @@
+name: Notion Triggered Workflow with Inputs
+on:
+  repository_dispatch:
+    types: [notion_trigger]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.client_payload.inputs.branch }}
+      
+      - name: Log Deployment Details
+        run: |
+          echo "Branch: ${{ github.event.client_payload.inputs.branch }}"
+          echo "Environment: ${{ github.event.client_payload.inputs.environment }}"
+          
+      - name: Deploy to Environment
+        run: |
+          # Add your deployment steps here
+          echo "Deploying to ${{ github.event.client_payload.inputs.environment }}"
+        env:
+          DEPLOY_ENV: ${{ github.event.client_payload.inputs.environment }}
+          
+      - name: Update Notion Status
+        if: always()
+        run: |
+          # Add code to update Notion status
+          # You could use the Notion API here to update the status
